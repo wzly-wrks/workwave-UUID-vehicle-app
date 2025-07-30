@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkWave Route Manager - Vehicle Selector</title>
+    <link rel="stylesheet" href="style.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>WorkWave Route Manager</h1>
+            <p>Vehicle UUID Lookup Tool</p>
+        </header>
+        
+        <main>
+            <div class="form-section">
+                <label for="vehicleSelect">Select Vehicle (External ID):</label>
+                <select id="vehicleSelect" disabled>
+                    <option value="">Loading vehicles...</option>
+                </select>
+                <button id="refreshBtn">Refresh Vehicles</button>
+            </div>
+            
+            <div class="result-section">
+                <h3>Vehicle Details</h3>
+                <div id="vehicleDetails">
+                    <p>Select a vehicle to view its UUID</p>
+                </div>
+            </div>
+            
+            <div id="errorMessage" class="error hidden"></div>
+            <div id="loadingIndicator" class="loading hidden">Loading...</div>
+        </main>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
