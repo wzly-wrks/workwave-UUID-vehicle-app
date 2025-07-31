@@ -32,12 +32,19 @@ A web application that connects to WorkWave's Route Manager API to display vehic
 
 ### Configuration
 
-Edit `proxy_server.js` to update your credentials:
+Set the following environment variables before running the server:
 
-```javascript
-const API_KEY = 'your-api-key-here';
-const TERRITORY_ID = 'your-territory-id-here';
+- `API_KEY` – your WorkWave API key  
+- `TERRITORY_ID` – the territory to query
+
+Create a `.env` file in the project root and add:
+
+```bash
+API_KEY=your_api_key_here
+TERRITORY_ID=your_territory_id_here
 ```
+
+The `.env` file is ignored by Git. You can also export these variables in your shell instead of using a file.
 
 ## How It Works
 
