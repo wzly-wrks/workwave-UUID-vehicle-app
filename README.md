@@ -20,7 +20,11 @@ A web application that connects to WorkWave's Route Manager API to display vehic
 
 1. **Extract the files** to a folder
 2. **Open terminal/command prompt** in that folder
-3. **Start the server**:
+3. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+4. **Start the server**:
    ```bash
    npm start
    ```
@@ -28,20 +32,23 @@ A web application that connects to WorkWave's Route Manager API to display vehic
    ```bash
    node proxy_server.js
    ```
-4. **Open your browser** to: `http://localhost:8082`
+5. **Open your browser** to: `http://localhost:8082`
 
 ### Configuration
 
 Set the following environment variables before running the server:
 
-- `API_KEY` – your WorkWave API key  
+- `API_KEY` – your WorkWave API key
 - `TERRITORY_ID` – the territory to query
+- `ALLOWED_ORIGIN` – optional, origin allowed for CORS requests
 
 Create a `.env` file in the project root and add:
 
 ```bash
 API_KEY=your_api_key_here
 TERRITORY_ID=your_territory_id_here
+
+ALLOWED_ORIGIN=http://localhost:8082
 ```
 
 The `.env` file is ignored by Git. You can also export these variables in your shell instead of using a file.

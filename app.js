@@ -1,8 +1,5 @@
 class WorkWaveVehicleApp {
     constructor() {
-        this.apiKey = 'a0bfa651-1a5a-42ce-822f-4881aae18753';
-        this.territoryId = 'cadd21fb-e3bc-4b27-bdbe-40023e344ace';
-        this.baseUrl = 'https://wwrm.workwave.com';
         this.vehicles = [];
         
         this.initializeElements();
