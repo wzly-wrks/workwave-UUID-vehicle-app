@@ -20,7 +20,11 @@ A web application that connects to WorkWave's Route Manager API to display vehic
 
 1. **Extract the files** to a folder
 2. **Open terminal/command prompt** in that folder
-3. **Start the server**:
+3. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+4. **Start the server**:
    ```bash
    npm start
    ```
@@ -28,7 +32,7 @@ A web application that connects to WorkWave's Route Manager API to display vehic
    ```bash
    node proxy_server.js
    ```
-4. **Open your browser** to: `http://localhost:8082`
+5. **Open your browser** to: `http://localhost:8082`
 
 ### Configuration
 
@@ -43,7 +47,7 @@ Create a `.env` file in the project root and add:
 ```bash
 API_KEY=your_api_key_here
 TERRITORY_ID=your_territory_id_here
-# Optional: restrict CORS to a specific origin
+
 ALLOWED_ORIGIN=http://localhost:8082
 ```
 
