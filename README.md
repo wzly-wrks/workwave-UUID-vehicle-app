@@ -105,7 +105,7 @@ workwave-vehicle-app/
 
 ## 🧐 Author
 
-Built with love in ~/Los_Angeles by [wzly.wrks](https://weezly.works).
+Built with ❤️ in ~/Los_Angeles by [wzly.wrks](https://weezly.works).
 
 ---
 
