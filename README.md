@@ -1,95 +1,114 @@
+```
+#                                '||`                                      '||            
+#                                 ||                                        ||            
+#  '\\    //` .|''|, .|''|, '''/  ||  '||  ||`    '\\    //` .|''|, '||''|  || //`  ('''' 
+#    \\/\//   ||..|| ||..||  //   ||   `|..||       \\/\//   ||  ||  ||     ||<<     `'') 
+#     \/\/    `|...  `|...  /... .||.      ||  ..    \/\/    `|..|' .||.   .|| \\.  `...' 
+#                                       ,  |'                                             
+#                                                                     
+```
+
 # WorkWave Route Manager UUID Vehicle App
 
-A web application that connects to WorkWave's Route Manager API to display vehicle External IDs and their corresponding UUIDs.
+A small but mighty web app that connects to WorkWave's Route Manager API and shows you each vehicle's UUID from their External ID. Built with Node.js, no frameworks, no fluff.
 
-## Features
+---
 
-- 🚐 **Vehicle Lookup**: Select vehicles by External ID to view their UUID
-- 🔄 **Real-time Data**: Fetches live data from WorkWave Route Manager API
-- 🎨 **Professional UI**: Clean, responsive design with loading states
-- 🔒 **Secure**: Server-side API calls to handle authentication
-- 📱 **Mobile Friendly**: Works on desktop and mobile devices
+## 🚀 Features
 
-## Quick Start
+* **Vehicle Lookup** – Get UUIDs from External IDs instantly
+* **Real-time Data** – Pulls live info via WorkWave API
+* **CORS-Handled** – Secure proxy server means no browser tantrums
+* **Mobile Friendly** – Clean UI works on phones too
+* **No API keys exposed** – All calls are server-side
 
-### Prerequisites
-- Node.js (version 14 or higher)
-- WorkWave Route Manager API access
+---
 
-### Installation
+## ⚙️ Quick Start
 
-1. **Extract the files** to a folder
-2. **Open terminal/command prompt** in that folder
-3. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-4. **Start the server**:
-   ```bash
-   npm start
-   ```
-   Or directly:
-   ```bash
-   node proxy_server.js
-   ```
-5. **Open your browser** to: `http://localhost:8082`
+### Prereqs
 
-### Configuration
+* Node.js (v14 or higher)
+* A valid WorkWave Route Manager API key
 
-Set the following environment variables before running the server:
-
-- `API_KEY` – your WorkWave API key
-- `TERRITORY_ID` – the territory to query
-- `ALLOWED_ORIGIN` – optional, origin allowed for CORS requests
-
-Create a `.env` file in the project root and add:
+### Install & Run
 
 ```bash
-API_KEY=your_api_key_here
-TERRITORY_ID=your_territory_id_here
+npm install
+npm start
+```
 
+Or run directly:
+
+```bash
+node proxy_server.js
+```
+
+Then open your browser to: [http://localhost:8082](http://localhost:8082)
+
+---
+
+## 💡 .env Setup
+
+Create a `.env` file in the project root like this:
+
+```env
+API_KEY=your_workwave_api_key
+TERRITORY_ID=your_territory_id
 ALLOWED_ORIGIN=http://localhost:8082
 ```
 
-The `.env` file is ignored by Git. You can also export these variables in your shell instead of using a file.
+✅ This file is git-ignored, so your keys stay private.
 
-## How It Works
+---
 
-1. **Proxy Server**: Node.js server handles WorkWave API calls to avoid CORS issues
-2. **Frontend**: HTML/CSS/JavaScript interface for vehicle selection
-3. **API Integration**: Connects to WorkWave Route Manager API using X-WorkWave-Key authentication
+## 🔌 API Routes
 
-## API Endpoints
+| Method | Endpoint        | Description                  |
+| ------ | --------------- | ---------------------------- |
+| GET    | `/`             | Main web interface           |
+| GET    | `/api/vehicles` | Proxied call to WorkWave API |
 
-- `GET /` - Main application page
-- `GET /api/vehicles` - Proxy endpoint for WorkWave vehicles API
+---
 
-## File Structure
+## 🧾 File Structure
 
 ```
 workwave-vehicle-app/
-├── index.html          # Main webpage
-├── app.js             # Frontend JavaScript
-├── style.css          # Styling
-├── proxy_server.js    # Node.js proxy server
-├── package.json       # Node.js configuration
-└── README.md          # This file
+├── index.html        # UI
+├── app.js            # Frontend logic
+├── style.css         # Styling
+├── proxy_server.js   # Node.js backend
+├── package.json      # NPM config
+└── .env              # (not committed)
 ```
 
-## Usage
+---
 
-1. Open the application in your browser
-2. Wait for vehicles to load automatically
-3. Select any vehicle from the dropdown
-4. View the corresponding UUID and vehicle details
-5. Use "Refresh Vehicles" to reload data after making changes in WorkWave
+## 💡 Usage
 
-## Troubleshooting
+1. Open the app
+2. Wait for vehicle data to load
+3. Select a vehicle from the dropdown
+4. View its UUID and metadata
+5. Hit “Refresh” if you’ve updated WorkWave
 
-- **Port already in use**: Change the PORT variable in `proxy_server.js`
-- **API errors**: Verify your API_KEY and TERRITORY_ID are correct
-- **CORS issues**: The proxy server handles this automatically
+---
 
-## Support
+## 🪨 Common Issues
 
-This application was created with ❤️ in ./Los_Angeles by wzly-wrks for WorkWave Route Manager integration.
+* **API not working?** Double-check your `.env` values
+* **Port already in use?** Change the `PORT` in `proxy_server.js`
+* **CORS errors?** You shouldn't see any — that's the proxy's job
+
+---
+
+## 🧐 Author
+
+Built with love in ~/Los_Angeles by [wzly.wrks](https://weezly.works).
+
+---
+
+## 🧼 License
+
+MIT — Use it, modify it, deploy it. Just don’t expose your API keys, and we’re cool.
