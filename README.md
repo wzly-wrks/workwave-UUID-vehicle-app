@@ -34,14 +34,17 @@ A web application that connects to WorkWave's Route Manager API to display vehic
 
 Set the following environment variables before running the server:
 
-- `API_KEY` – your WorkWave API key  
+- `API_KEY` – your WorkWave API key
 - `TERRITORY_ID` – the territory to query
+- `ALLOWED_ORIGIN` – optional, origin allowed for CORS requests
 
 Create a `.env` file in the project root and add:
 
 ```bash
 API_KEY=your_api_key_here
 TERRITORY_ID=your_territory_id_here
+# Optional: restrict CORS to a specific origin
+ALLOWED_ORIGIN=http://localhost:8082
 ```
 
 The `.env` file is ignored by Git. You can also export these variables in your shell instead of using a file.
