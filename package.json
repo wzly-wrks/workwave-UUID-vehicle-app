@@ -8,15 +8,21 @@
     "dev": "node proxy_server.js"
   },
   "dependencies": {
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.6.1"
   },
-  "keywords": ["workwave", "route-manager", "vehicle", "uuid", "lookup"],
+  "keywords": [
+    "workwave",
+    "route-manager",
+    "vehicle",
+    "uuid",
+    "lookup"
+  ],
   "author": "NinjaTeach AI",
   "license": "MIT",
   "engines": {
     "node": ">=14.0.0"
   },
-  "dependencies": {
-    "dotenv": "^16.6.1"
+  "devDependencies": {
+    "eslint": "^9.32.0"
   }
 }

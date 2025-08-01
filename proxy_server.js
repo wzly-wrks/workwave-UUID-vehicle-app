@@ -5,13 +5,36 @@ const path = require('path');
 const url = require('url');
 require('dotenv').config();
 
+const mimeTypes = {
+    '.html': 'text/html',
+    '.js': 'text/javascript',
+    '.css': 'text/css',
+    '.json': 'application/json',
+    '.png': 'image/png',
+    '.jpg': 'image/jpg',
+    '.gif': 'image/gif',
+    '.svg': 'image/svg+xml'
+};
+
 const API_KEY = process.env.API_KEY;
 const TERRITORY_ID = process.env.TERRITORY_ID;
 const WORKWAVE_BASE_URL = 'https://wwrm.workwave.com';
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN;
 
 const server = http.createServer((req, res) => {
-  const parsedUrl = url.parse(req.url, true);
+    const parsedUrl = url.parse(req.url, true);
+    console.log(`[${req.method}] ${req.url}`);
+
+    if (req.method === 'OPTIONS') {
+        res.writeHead(204, {
+            'Access-Control-Allow-Origin': ALLOWED_ORIGIN || '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+            'Vary': 'Origin'
+        });
+        res.end();
+        return;
+    }
 
   if (parsedUrl.pathname === '/api/vehicles') {
     handleVehiclesAPI(req, res);
@@ -27,17 +50,7 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  const extname = String(path.extname(filePath)).toLowerCase();
-  const mimeTypes = {
-    '.html': 'text/html',
-    '.js': 'text/javascript',
-    '.css': 'text/css',
-    '.json': 'application/json',
-    '.png': 'image/png',
-    '.jpg': 'image/jpg',
-    '.gif': 'image/gif',
-    '.svg': 'image/svg+xml'
-  };
+  const extname = String(path.extname(safePath)).toLowerCase();
   const contentType = mimeTypes[extname] || 'application/octet-stream';
 
   fs.readFile(safePath, (error, content) => {
