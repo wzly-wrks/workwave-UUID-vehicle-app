@@ -8,7 +8,7 @@ require('dotenv').config();
 const API_KEY = process.env.API_KEY;
 const TERRITORY_ID = process.env.TERRITORY_ID;
 const WORKWAVE_BASE_URL = 'https://wwrm.workwave.com';
-const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || 'http://localhost:8082';
+const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN;
 
 const server = http.createServer((req, res) => {
   const parsedUrl = url.parse(req.url, true);
@@ -27,7 +27,7 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  const extname = String(path.extname(safePath)).toLowerCase();
+  const extname = String(path.extname(filePath)).toLowerCase();
   const mimeTypes = {
     '.html': 'text/html',
     '.js': 'text/javascript',
@@ -50,12 +50,16 @@ const server = http.createServer((req, res) => {
         res.end('Server Error: ' + error.code + ' ..\\n');
       }
     } else {
-      res.writeHead(200, {
-        'Content-Type': contentType,
-        'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-      });
+      const headers = {
+        'Content-Type': contentType
+      };
+      if (ALLOWED_ORIGIN && req.headers.origin === ALLOWED_ORIGIN) {
+        headers['Access-Control-Allow-Origin'] = ALLOWED_ORIGIN;
+        headers['Vary'] = 'Origin';
+        headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';
+        headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';
+      }
+      res.writeHead(200, headers);
       res.end(content, 'utf-8');
     }
   });
@@ -90,22 +94,26 @@ function handleVehiclesAPI(req, res) {
     });
 
     apiRes.on('end', () => {
-      res.writeHead(200, {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-      });
+      const headers = { 'Content-Type': 'application/json' };
+      if (ALLOWED_ORIGIN && req.headers.origin === ALLOWED_ORIGIN) {
+        headers['Access-Control-Allow-Origin'] = ALLOWED_ORIGIN;
+        headers['Vary'] = 'Origin';
+        headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';
+        headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';
+      }
+      res.writeHead(200, headers);
       res.end(data);
     });
   });
 
   apiReq.on('error', (error) => {
     console.error('API Error:', error);
-    res.writeHead(500, {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': ALLOWED_ORIGIN
-    });
+    const headers = { 'Content-Type': 'application/json' };
+    if (ALLOWED_ORIGIN && req.headers.origin === ALLOWED_ORIGIN) {
+      headers['Access-Control-Allow-Origin'] = ALLOWED_ORIGIN;
+      headers['Vary'] = 'Origin';
+    }
+    res.writeHead(500, headers);
     res.end(JSON.stringify({ error: 'Failed to fetch vehicles', details: error.message }));
   });
 

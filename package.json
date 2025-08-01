@@ -7,13 +7,10 @@
     "start": "node proxy_server.js",
     "dev": "node proxy_server.js"
   },
-  "keywords": [
-    "workwave",
-    "route-manager",
-    "vehicle",
-    "uuid",
-    "lookup"
-  ],
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  },
+  "keywords": ["workwave", "route-manager", "vehicle", "uuid", "lookup"],
   "author": "NinjaTeach AI",
   "license": "MIT",
   "engines": {
